@@ -9,7 +9,7 @@
                         <i class="fas fa-chambre-plus"></i>    Ajouter
                     </button>
                     <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Chercher">
+                    <input type="text" wire:model='search' name="table_search" class="form-control float-right" placeholder="Chercher">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                                 <i class="fas fa-search"></i>
@@ -24,26 +24,24 @@
                     <thead>
                         <tr>
                             {{-- <th>Identifiant</th> --}}
-                            <th>Numero</th>
-                            <th>status</th>
-                            <th>Prix de chambre</th>
-                            <th>Type de chambre</th>
-                            <th>Bloc</th>
+                            <th>nom</th>
+                            <th>prenom</th>
+                            <th>nationalite</th>
+                            <th>email</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($chambres as $chambre)
+                        @foreach ($clients as $client)
                             <tr>
-                                {{-- <td>{{$chambre->id}}</td> --}}
-                                <td>{{$chambre->chambre_numero}}</td>
-                                <td>{{$chambre->chambre_status ? "Occupé" : "Disponible"}}</td>
-                                <td>{{$chambre->type_chambre->chambre_prix}}</td>
-                                <td>{{$chambre->type_chambre->chambre_type}}</td>
-                                <td>{{$chambre->bloc}}</td>
+                                {{-- <td>{{$client->id}}</td> --}}
+                                <td>{{$client->nom}}</td>
+                                <td>{{$client->prenom}}</td>
+                                <td>{{$client->nationalite ? "Ivoirien" : "Etranger"}}</td>
+                                <td>{{$client->email}}</td>
                                 <td class="text-center">
                                     <button class="btn btn-success"><i class="fas fa-eye">voir</i></button>
-                                    <button class="btn btn-warning text-light" wire:click='goToEdit({{$chambre->type_chambre->id}},{{$chambre->id}})'><i class="fas fa-eye">Modifier</i></button>
+                                    <button class="btn btn-warning text-light" wire:click='goToEdit({{$client->id}})'><i class="fas fa-eye">Modifier</i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -62,7 +60,7 @@
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"> {{$editMode ? "modifier":"Ajouter"}} utilisateur </h5>
+                    <h5 class="modal-title" id="staticBackdropLabel"> {{$editMode ? "Modifier":"Ajouter"}} client </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form wire:submit.prevent='{{$editMode ? "modifier":"ajouter"}}'>
@@ -71,13 +69,43 @@
 
                             <div class="col-md mt-3  ">
                                 <div class="input-group">
-                                    <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                                    {{-- <span class="input-group-text"> <i class="fas fa-user"></i> </span> --}}
                                     <div class="form-floating ">
-                                      <input type="text" wire:model='numero' class="form-control  @error('numero') is-invalid @enderror"   autocomplete="numero" autofocus id="floatingInputGroup2" placeholder="Numero chambre" required>
-                                      <label for="floatingInputGroup2">Numero chambre</label>
+                                      <input type="text" wire:model='nom' class="form-control  @error('nom') is-invalid @enderror"   autocomplete="nom" autofocus id="floatingInputGroup2" placeholder="Nom client" required>
+                                      <label for="floatingInputGroup2">Nom client</label>
                                     </div>
                                   </div>
-                                  @error('numero')
+                                  @error('nom')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                  @enderror
+
+                            </div>
+                            <div class="col-md mt-3  ">
+                                <div class="input-group">
+                                    {{-- <span class="input-group-text"> <i class="fas fa-user"></i> </span> --}}
+                                    <div class="form-floating ">
+                                      <input type="text" wire:model='prenom' class="form-control  @error('prenom') is-invalid @enderror"   autocomplete="prenom" autofocus id="floatingInputGroup2" placeholder="Prenom client" required>
+                                      <label for="floatingInputGroup2">Prenom client</label>
+                                    </div>
+                                  </div>
+                                  @error('prenom')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                  @enderror
+
+                            </div>
+                            <div class="col-md mt-3  ">
+                                <div class="input-group">
+                                    {{-- <span class="input-group-text"> <i class="fas fa-user"></i> </span> --}}
+                                    <div class="form-floating ">
+                                      <input type="text" wire:model='email' class="form-control  @error('email') is-invalid @enderror"   autocomplete="email" autofocus id="floatingInputGroup2" placeholder="Email client" required>
+                                      <label for="floatingInputGroup2">Email client</label>
+                                    </div>
+                                  </div>
+                                  @error('email')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -85,7 +113,7 @@
 
                             </div>
 
-                            <div class="col-md mt-3">
+                            {{-- <div class="col-md mt-3">
                                 <div class="form-floating">
                                   <select class="form-select fs-5" wire:model='type_chambre_id' id="floatingSelectGrid">
                                     @foreach ($typechambres as $typechambre)
@@ -94,46 +122,36 @@
                                   </select>
                                   <label for="floatingSelectGrid">Selectionner type de chambre</label>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                          <div class="col-md mt-3 border pt-3 bg-light rounded">
+                          {{-- <div class="col-md mt-3 border pt-3 bg-light rounded">
                             <p>Prix :
                                    @foreach ($type_chambres as $type_chambre)
                                         <strong>{{$type_chambre->chambre_prix}}</strong>
                                     @endforeach
                             </p>
-                          </div>
-
-                          {{-- partie date de depart --}}
-    <div class="col-md-4">
-        <label for="end_date">Date de départ <span class="text-danger">*</span></label> <br>
-        <input type="date" wire:model="end_date" name="end_date"  class="form-control col-md-10 @error('end_date') is-invalid @enderror"   min="{{ date('Y')  }}-{{ date('m')  }}-{{ date('d')  }}" value="{{ date('d', strtotime('+1 day'))  }}-{{ date('m')  }}-{{ date('Y')  }}">
-        @error('end_date')
-            <span  class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong></span>
-        @enderror
-    </div>
+                          </div> --}}
 
                           <div class="col-md mt-3">
                             <div class="form-floating">
-                              <select class="form-select fs-5" wire:model='bloc' id="floatingSelectGrid">
-                                <option >Bloc A</option>
-                                <option >Bloc B</option>
-                                <option >Bloc C</option>
+                              <select class="form-select fs-5" wire:model='nationalite' id="floatingSelectGrid">
+                                <option value="1">Ivoirien(ne)</option>
+                                <option value="0">Etranger(e)</option>
                               </select>
-                              <label for="floatingSelectGrid">Selectionner bloc</label>
+                              <label for="floatingSelectGrid">Selectionner nationalité</label>
                             </div>
                           </div>
+
+                          {{-- {{ $nationalite }} --}}
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit"  class="btn {{ $errors->all() ? 'btn-danger disabled': 'btn-primary'}}"> {{$editMode ? "Modifier":"Ajouter"}}</button>
+                        <button type="submit"  class="btn {{ $errors->all() ? 'btn-danger disabled': 'btn-primary'}} " > {{$editMode ? "Modifier":"Ajouter"}}</button>
                     </div>
                 </form>
                 </div>
                 </div>
             </div>
-
-
-
 
 </div>

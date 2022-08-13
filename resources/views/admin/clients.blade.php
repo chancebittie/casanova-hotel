@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'chambres')
+@section('title', 'clients')
 
 {{-- @section('content_header')
     <h1>Dashboard</h1>
@@ -7,7 +7,7 @@
 
 @section('content')
    <main>
-         @livewire('chambres')
+         @livewire('clients')
    </main>
 @stop
 {{-- @section('right-sidebar')
@@ -25,11 +25,11 @@
 @stop
 
 <script>
-    window.addEventListener('showModalChambre', event => {
+    window.addEventListener('showModalClient', event => {
         $("#staticBackdrop").modal('show');
 
     })
-    window.addEventListener('hideModalChambre', event => {
+    window.addEventListener('hideModalClient', event => {
         $("#staticBackdrop").modal('hide');
         Swal.fire({
             position: 'top-end',

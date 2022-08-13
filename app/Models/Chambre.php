@@ -10,7 +10,7 @@ class Chambre extends Model
     use HasFactory;
 
     protected $fillable=[
-        "numero",
+        "chambre_numero",
         "bloc",
         "type_chambre_id",
         // "",

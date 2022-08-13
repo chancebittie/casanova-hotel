@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'cassanova-hotel',
-    'title_prefix' => '',
+    'title_prefix' => 'cassanova-',
     'title_postfix' => '',
 
     /*
@@ -255,7 +255,7 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'Utilusateurs',
+            'text' => 'Utilisateurs',
             'url'  => '/utilisateurs',
             'icon' => 'fas fa-fw fa-user',
         ],
@@ -267,6 +267,16 @@ return [
         [
             'text' => 'TypeChambres',
             'url'  => 'typechambres',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'clients',
+            'url'  => 'clients',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'reservations',
+            'url'  => 'reservations',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [

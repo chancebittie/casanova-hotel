@@ -38,4 +38,12 @@ class HomeController extends Controller
     {
         return view('admin.typechambres');
     }
+    public function clients()
+    {
+        return view('admin.clients');
+    }
+    public function reservations()
+    {
+        return view('admin.reservations');
+    }
 }

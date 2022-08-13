@@ -31,3 +31,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/utilisateurs', [HomeController::class, 'utilisateurs'] )->name('utilisateurs');
 Route::get('/chambres', [HomeController::class, 'chambres'] )->name('chambres');
 Route::get('/typechambres', [HomeController::class, 'typechambres'] )->name('typechambres');
+Route::get('/clients', [HomeController::class, 'clients'] )->name('clients');
+Route::get('/reservations', [HomeController::class, 'reservations'] )->name('reservations');

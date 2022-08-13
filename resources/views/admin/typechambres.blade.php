@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'utilisateurs')
+@section('title', 'type-chambres')
 
 {{-- @section('content_header')
     <h1>Dashboard</h1>

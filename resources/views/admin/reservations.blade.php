@@ -1,13 +1,18 @@
 @extends('adminlte::page')
-@section('title', 'chambres')
+@section('title', 'reservations')
 
 {{-- @section('content_header')
     <h1>Dashboard</h1>
 @stop --}}
 
 @section('content')
-   <main>
-         @livewire('chambres')
+   <main class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                {{-- Reservations --}}
+                 @livewire('reservations')
+            </div>
+        </div>
    </main>
 @stop
 {{-- @section('right-sidebar')
