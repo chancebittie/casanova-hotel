@@ -4,9 +4,9 @@
             <h3 class="card-title">Table d'en-tête fixe</h3>
             <div class="card-tools d-flex align-items-center ">
                 <!-- Button trigger modal -->
-                <button type="button" wire:click='goToAdd' class="btn btn-primary mr-4" >
-                    <i class="fas fa-chambre-plus"></i>  Ajouter
-                </button>
+                <a href="liste-reservations" type="button" wire:click='goToAdd' class="btn btn-primary mr-4" >
+                    <i class="fas fa-chambre-plus"></i>  Retour
+                </a>
                 <div class="input-group input-group-sm" x-data="{ open: false }" style="width: 150px;">
                 <input type="text" name="table_search" wire:model="search"  x-on:click.away=" open = false " @click="open = true" class="form-control float-right" placeholder="Chercher">
                     <div class="input-group-append">
@@ -89,7 +89,7 @@
                         <div class="input-group">
                             {{-- <span class="input-group-text"> <i class="fas fa-user"></i> </span> --}}
                             <div class="form-floating ">
-                            <input type="text" wire:model='nom' class="form-control  @error('nom') is-invalid @enderror"  autofocus id="floatingInputGroup1" placeholder="Nom client" required>
+                            <input type="text" wire:model='nom' class="form-control disabled  @error('nom') is-invalid @enderror"  autofocus id="floatingInputGroup1" placeholder="Nom client" required>
                             <label for="floatingInputGroup1">Nom {{$personneMode ? "client" : "société"}}</label>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                     <div class="input-group">
                         {{-- <span class="input-group-text"> <i class="fas fa-user"></i> </span> --}}
                         <div class="form-floating ">
-                            <input type="text" wire:model='prenom' class="form-control  @error('prenom') is-invalid @enderror"   autocomplete="prenom"  id="floatingInputGroup2" placeholder="Prenom client" required>
+                            <input type="text" wire:model='prenom' class="form-control  @error('prenom') is-invalid @enderror"  autocomplete="prenom"  id="floatingInputGroup2" placeholder="Prenom client" required>
                             <label for="floatingInputGroup2">Prenom client </label>
                         </div>
                         </div>

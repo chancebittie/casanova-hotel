@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -45,5 +47,18 @@ class HomeController extends Controller
     public function reservations()
     {
         return view('admin.reservations');
+    }
+    public function restaurant_bar()
+    {
+        return view('admin.restaurant-bar');
+    }
+    public function paiements()
+    {
+        // $reservation=Reservation::find($id);
+        return view('admin.paiements');
+    }
+    public function listeReservations()
+    {
+        return view('admin.liste_reservations');
     }
 }

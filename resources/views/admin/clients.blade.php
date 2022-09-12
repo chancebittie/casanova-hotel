@@ -34,10 +34,13 @@
         Swal.fire({
             position: 'top-end',
             icon: 'success',
+            toast:true,
             title: 'Operation effectuer avec succes',
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000
             })
+
+
     })
 
     window.addEventListener('showModalss', event => {

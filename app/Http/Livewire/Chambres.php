@@ -40,14 +40,10 @@ class Chambres extends Component
         $this->reset("type_chambre_id","chambre_numero","bloc");
         $type_chambres_first=TypeChambre::find(1);
 
-        if (!empty($this->type_chambre_id)) {
-            $this->type_chambre_id=$this->type_chambre_id;
-        } else {
+        if (empty($this->type_chambre_id)) {
             $this->type_chambre_id=$type_chambres_first->id;
         }
-        if (!empty($this->bloc)) {
-            $this->bloc=$this->bloc;
-        } else {
+        if (empty($this->bloc)) {
             $this->bloc=" Bloc A";
         }
 
@@ -60,7 +56,7 @@ class Chambres extends Component
         Chambre::create([
             "chambre_numero"=>$this->chambre_numero,
             "bloc"=>$this->bloc,
-            "chambre_status"=>0,
+            // "chambre_status"=>0,
             "type_chambre_id"=>$this->type_chambre_id,
         ]);
         $this->reset("type_chambre_id","chambre_numero","bloc");

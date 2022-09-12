@@ -1,18 +1,13 @@
 @extends('adminlte::page')
-@section('title', 'reservations')
+@section('title', 'paiements')
 
 {{-- @section('content_header')
     <h1>Dashboard</h1>
 @stop --}}
 
 @section('content')
-   <main class="row mt-4">
-        <div class="col-12">
-            <div class="card">
-                {{-- Reservations --}}
-                 @livewire('reservations')
-            </div>
-        </div>
+   <main>
+         @livewire('paiements')
    </main>
 @stop
 {{-- @section('right-sidebar')
@@ -39,10 +34,9 @@
         Swal.fire({
             position: 'top-end',
             icon: 'success',
-            toast:true,
             title: 'Operation effectuer avec succes',
             showConfirmButton: false,
-            timer: 3000
+            timer: 1500
             })
     })
 

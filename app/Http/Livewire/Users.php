@@ -35,6 +35,9 @@ class Users extends Component
     public function goToAdd(){
         $this->editMode=false;
         $this->reset("name","pseudo","role");
+        if (empty($this->role)) {
+            $this->role=0;
+        }
         $this->dispatchBrowserEvent("showModal");
     }
     public function ajouter(){

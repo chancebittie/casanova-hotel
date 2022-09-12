@@ -14,4 +14,11 @@ class Client extends Model
         "email",
         "nationalite",
 ];
+
+ // un client peut faire plusieur reservation
+ public function reservations(){
+    return $this->hasMany(Reservation::class);
+
+}
+
 }

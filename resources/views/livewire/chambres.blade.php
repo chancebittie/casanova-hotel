@@ -73,11 +73,11 @@
                                 <div class="input-group">
                                     <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                                     <div class="form-floating ">
-                                      <input type="text" wire:model='numero' class="form-control  @error('numero') is-invalid @enderror"   autocomplete="numero" autofocus id="floatingInputGroup2" placeholder="Numero chambre" required>
+                                      <input type="text" wire:model='chambre_numero' class="form-control  @error('chambre_numero') is-invalid @enderror"   autocomplete="chambre_numero" autofocus id="floatingInputGroup2" placeholder="Numero chambre" required>
                                       <label for="floatingInputGroup2">Numero chambre</label>
                                     </div>
                                   </div>
-                                  @error('numero')
+                                  @error('chambre_numero')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -104,14 +104,6 @@
                             </p>
                           </div>
 
-                          {{-- partie date de depart --}}
-    <div class="col-md-4">
-        <label for="end_date">Date de départ <span class="text-danger">*</span></label> <br>
-        <input type="date" wire:model="end_date" name="end_date"  class="form-control col-md-10 @error('end_date') is-invalid @enderror"   min="{{ date('Y')  }}-{{ date('m')  }}-{{ date('d')  }}" value="{{ date('d', strtotime('+1 day'))  }}-{{ date('m')  }}-{{ date('Y')  }}">
-        @error('end_date')
-            <span  class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong></span>
-        @enderror
-    </div>
 
                           <div class="col-md mt-3">
                             <div class="form-floating">

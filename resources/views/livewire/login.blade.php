@@ -23,11 +23,11 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-12 mt-3  mx-auto">
+                        <div  x-data="{ eye: false }" class="col-md-12 mt-3  mx-auto">
                             <div class="input-group">
-                                <span class="input-group-text"> <i class="fas fa-eye"></i> </span>
+                                <button class="input-group-text" x-on:click=" eye =! eye "> <i x-bind:class=" eye ? 'fas fa-eye' : 'fas fa-eye-slash'"></i> </button>
                                 <div class="form-floating ">
-                                  <input type="password" wire:model='password' class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}"  autocomplete="password"  id="floatingInputGroup3" placeholder="password" required>
+                                  <input x-bind:type=" eye ? 'text' : 'password'" wire:model='password' class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}"  autocomplete="password"  id="floatingInputGroup3" placeholder="password" required>
                                   <label for="floatingInputGroup3">Mots de passe</label>
                                 </div>
                               </div>

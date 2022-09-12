@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Chambre;
+use App\Models\User;
 use App\Models\Client;
+use App\Models\Chambre;
+use Livewire\Component;
+use App\Models\Paiement;
 use App\Models\Reservation;
 use App\Models\TypeChambre;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 
 class Reservations extends Component
 {
@@ -17,7 +18,7 @@ class Reservations extends Component
     public $nom;
     public $prenom;
     public $email;
-    public $nationalite;
+    public $nationalite=1;
     public $date_debut;
     public $date_fin;
     public $duree_sejour;
@@ -38,11 +39,12 @@ class Reservations extends Component
     public $facture;
     public $search;
     public $last_id;
+    public $reservation_last_id;
 
     public $rules=[
         "nom"=>"required|string|min:3|max:200",
         "prenom"=>"required|string|min:3|max:200",
-        // "email"=>"email|max:200",
+        "chambre_id"=>"required",
         // "nationalite"=>"required|integer",
         // "date_debut"=>"required|date",
         // "date_fin"=>"required|date",
@@ -70,7 +72,7 @@ class Reservations extends Component
         $this->day2 = strtotime($this->date_fin);     //date de fin
 //   round ces pour arrondir
 //   jd-ja / 1 ans / jour
-        $this->reçu=date('dmYHi');
+        // $this->reçu=date('dmYHi');
 
         // if (empty($this->reduction)) {
         //     $this->reduction=0;
@@ -115,26 +117,26 @@ class Reservations extends Component
     public function render()
     {
 
-        if ($this->type_chambre_id= 3 and empty($this->chambre_id) ) {
-            $this->chambre_id=3;
-        }
-        if ($this->type_chambre_id= 2 and empty($this->chambre_id) ) {
-            $this->chambre_id=2;
-        }
+        // if ($this->type_chambre_id= 3 and empty($this->chambre_id) ) {
+        //     $this->chambre_id=3;
+        // }
+        // if ($this->type_chambre_id= 2 and empty($this->chambre_id) ) {
+        //     $this->chambre_id=2;
+        // }
 
-        if ($this->type_chambre_id= 1 and empty($this->chambre_id) ) {
-            $this->chambre_id=1;
-        }
+        // if ($this->type_chambre_id= 1 and empty($this->chambre_id) ) {
+        //     $this->chambre_id=1;
+        // }
         if (empty($this->type_chambre_id)) {
             $this->type_chambre_id=1;
         }
         // if (empty($this->type_reservation)) {
         //     $this->type_reservation=1;
         // }
-        if (empty($this->chambre_id)) {
-            $chambre_id_first=Chambre::find(1);
-            $this->chambre_id= $chambre_id_first->chambre_numero;
-        }
+        // if (empty($this->chambre_id)) {
+        //     $chambre_id_first=Chambre::find(1);
+        //     $this->chambre_id= $chambre_id_first->chambre_numero;
+        // }
         // Carbon::setLocale('fr');
         $clientQuery=Client::query();
         if ($this->search != "") {
@@ -143,6 +145,8 @@ class Reservations extends Component
         }
         $clien=Client::latest("id")->first();
         $this->last_id=$clien->id + 1;
+        $reservation_last=Reservation::latest("id")->first();
+        $this->reservation_last_id=$reservation_last->id + 1;
 
         return view('livewire.reservation',[
             "reservations"=>Reservation::all(),
@@ -195,10 +199,30 @@ class Reservations extends Component
             "duree_sejour"=>$this->duree_sejour,
             "nombre_chambre"=>$this->nombre_chambre,
             "facture"=>$this->facture,
+            "type_chambre_id"=>$this->type_chambre_id,
             "chambre_id"=>$this->chambre_id,
             "user_id"=>Auth::user()->id,
             "client_id"=>$this->client_id,
         ]);
+
+        if ($this->type_reservation) {
+            Paiement::create([
+                "chambre_id"=>$this->chambre_id,
+                "type_chambre_id"=>$this->type_chambre_id,
+                "reservation_id"=>$this->reservation_last_id,
+                "client_id"=>$this->client_id,
+                "user_id"=>Auth::user()->id,
+                // "mode_paiement_id"=>$this->mode_paiement_id,
+                "facture_total"=>$this->facture,
+                // "chambre_id"=>$this->,
+                // "chambre_id"=>$this->,
+            ]);
+
+            $chambre=Chambre::find($this->chambre_id);
+            $chambre->update([
+                "chambre_status"=>1,
+            ]);
+        }
         $this->reset("nom","prenom","email","nationalite","date_debut","date_fin","duree_sejour","nombre_chambre","chambre_id","facture","reduction");
         $this->dispatchBrowserEvent("hideModalChambre");
     }

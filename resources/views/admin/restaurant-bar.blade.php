@@ -1,18 +1,18 @@
 @extends('adminlte::page')
-@section('title', 'reservations')
+@section('title', 'restaurant-bar')
 
 {{-- @section('content_header')
     <h1>Dashboard</h1>
 @stop --}}
 
 @section('content')
-   <main class="row mt-4">
-        <div class="col-12">
-            <div class="card">
+   <main>
+        {{-- <div class="col-12">
+            <div class="card"> --}}
                 {{-- Reservations --}}
-                 @livewire('reservations')
-            </div>
-        </div>
+                 @livewire('restaurant-bar')
+            {{-- </div>
+        </div> --}}
    </main>
 @stop
 {{-- @section('right-sidebar')
@@ -30,12 +30,12 @@
 @stop
 
 <script>
-    window.addEventListener('showModalChambre', event => {
-        $("#staticBackdrop").modal('show');
+    window.addEventListener('showModalRestaurant', event => {
+        $("#modalRestaurant").modal('show');
 
     })
-    window.addEventListener('hideModalChambre', event => {
-        $("#staticBackdrop").modal('hide');
+    window.addEventListener('hideModalRestaurant', event => {
+        $("#modalRestaurant").modal('hide');
         Swal.fire({
             position: 'top-end',
             icon: 'success',

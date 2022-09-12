@@ -13,21 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('paiements', function (Blueprint $table) {
             $table->id();
-            // $table->string("nom");
-            // $table->string("prenom");
-            $table->boolean("status_reservation");
-            $table->date("date_debut");
-            $table->date("date_fin");
-            $table->integer("duree_sejour");
-            $table->integer("nombre_chambre");
-            $table->integer("reduction");
-            $table->integer("facture");
+            $table->integer('facture_total');
+            $table->integer('status_paiement')->default(0);
             $table->foreignId("chambre_id")->constrained();
             $table->foreignId("type_chambre_id")->constrained();
             $table->foreignId("user_id")->constrained();
             $table->foreignId("client_id")->constrained();
+            $table->foreignId("reservation_id")->constrained();
+            $table->foreignId("mode_paiement_id")->constrained()->nullable();
+            $table->foreignId("restauration_id")->constrained();
             $table->timestamps();
         });
     }
@@ -39,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('paiements');
     }
 };

@@ -11,6 +11,7 @@ class Chambre extends Model
 
     protected $fillable=[
         "chambre_numero",
+        "chambre_status",
         "bloc",
         "type_chambre_id",
         // "",

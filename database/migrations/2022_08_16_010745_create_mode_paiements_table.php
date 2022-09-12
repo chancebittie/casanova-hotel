@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('type_chambres', function (Blueprint $table) {
+        Schema::create('mode_paiements', function (Blueprint $table) {
             $table->id();
-            $table->string("chambre_type");
-            $table->integer("chambre_prix");
+            $table->string("libelle");
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_chambres');
+        Schema::dropIfExists('mode_paiements');
     }
 };

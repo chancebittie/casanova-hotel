@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('chambres', function (Blueprint $table) {
             $table->id();
-            $table->integer("numero");
+            $table->integer("chambre_numero");
             $table->string("bloc");
-            $table->boolean("status");
+            $table->boolean("chambre_status");
             $table->foreignId("type_chambre_id")->constrained();
             $table->timestamps();
         });
